@@ -1,5 +1,5 @@
 kind: pipeline
-name: testing
+name: default
 
 platform:
   os: linux
@@ -27,10 +27,6 @@ steps:
   volumes:
   - name: gopath
     path: /go
-
-volumes:
-- name: gopath
-  temp: {}
 
 trigger:
   ref:
