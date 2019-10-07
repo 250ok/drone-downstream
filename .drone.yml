@@ -59,7 +59,7 @@ steps:
     event:
     - tag
 
-- name: executable
+- name: executable-amd64
   pull: always
   image: golang:1.11
   commands:
