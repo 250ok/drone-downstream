@@ -172,11 +172,11 @@ steps:
       exclude:
       - pull_request
 
-trigger:
-  ref:
-  - refs/heads/master
-  - "refs/tags/**"
-  - "refs/pull/**"
+  trigger:
+    ref:
+    - refs/heads/master
+    - "refs/tags/**"
+    - "refs/pull/**"
 
 - name: build-push
   pull: always
@@ -244,11 +244,11 @@ trigger:
       exclude:
       - pull_request
 
-trigger:
-  ref:
-  - refs/heads/master
-  - "refs/tags/**"
-  - "refs/pull/**"
+  trigger:
+    ref:
+    - refs/heads/master
+    - "refs/tags/**"
+    - "refs/pull/**"
 
 - name: manifest
   pull: always
@@ -262,7 +262,7 @@ trigger:
     username:
       from_secret: docker_username
 
-trigger:
-  ref:
-  - refs/heads/master
-  - "refs/tags/**"
+  trigger:
+    ref:
+    - refs/heads/master
+    - "refs/tags/**"
