@@ -106,149 +106,149 @@ steps:
     - "refs/tags/**"
     - "refs/pull/**"
 
-- name: build-push-arm64
-  pull: always
-  image: golang:1.11
-  commands:
-  - "go build -v -ldflags \"-X main.version=${DRONE_COMMIT_SHA:0:8}\" -a -tags netgo -o release/linux/arm64/drone-downstream"
-  environment:
-    CGO_ENABLED: 0
-    GO111MODULE: on
-  when:
-    event:
-      exclude:
-      - tag
+# - name: build-push-arm64
+#   pull: always
+#   image: golang:1.11
+#   commands:
+#   - "go build -v -ldflags \"-X main.version=${DRONE_COMMIT_SHA:0:8}\" -a -tags netgo -o release/linux/arm64/drone-downstream"
+#   environment:
+#     CGO_ENABLED: 0
+#     GO111MODULE: on
+#   when:
+#     event:
+#       exclude:
+#       - tag
 
-- name: build-tag-arm64
-  pull: always
-  image: golang:1.11
-  commands:
-  - "go build -v -ldflags \"-X main.version=${DRONE_TAG##v}\" -a -tags netgo -o release/linux/arm64/drone-downstream"
-  environment:
-    CGO_ENABLED: 0
-    GO111MODULE: on
-  when:
-    event:
-    - tag
+# - name: build-tag-arm64
+#   pull: always
+#   image: golang:1.11
+#   commands:
+#   - "go build -v -ldflags \"-X main.version=${DRONE_TAG##v}\" -a -tags netgo -o release/linux/arm64/drone-downstream"
+#   environment:
+#     CGO_ENABLED: 0
+#     GO111MODULE: on
+#   when:
+#     event:
+#     - tag
 
-- name: executable-arm64
-  pull: always
-  image: golang:1.11
-  commands:
-  - ./release/linux/arm64/drone-downstream --help
+# - name: executable-arm64
+#   pull: always
+#   image: golang:1.11
+#   commands:
+#   - ./release/linux/arm64/drone-downstream --help
 
-- name: dryrun-arm64
-  pull: always
-  image: plugins/docker:linux-arm64
-  settings:
-    daemon_off: false
-    dockerfile: docker/Dockerfile.linux.arm64
-    dry_run: true
-    password:
-      from_secret: docker_password
-    repo: 250ok/downstream
-    tags: linux-arm64
-    username:
-      from_secret: docker_username
-  when:
-    event:
-    - pull_request
+# - name: dryrun-arm64
+#   pull: always
+#   image: plugins/docker:linux-arm64
+#   settings:
+#     daemon_off: false
+#     dockerfile: docker/Dockerfile.linux.arm64
+#     dry_run: true
+#     password:
+#       from_secret: docker_password
+#     repo: 250ok/downstream
+#     tags: linux-arm64
+#     username:
+#       from_secret: docker_username
+#   when:
+#     event:
+#     - pull_request
 
-- name: publish-arm64
-  pull: always
-  image: plugins/docker:linux-arm64
-  settings:
-    auto_tag: true
-    auto_tag_suffix: linux-arm64
-    daemon_off: false
-    dockerfile: docker/Dockerfile.linux.arm64
-    password:
-      from_secret: docker_password
-    repo: 250ok/downstream
-    username:
-      from_secret: docker_username
-  when:
-    event:
-      exclude:
-      - pull_request
+# - name: publish-arm64
+#   pull: always
+#   image: plugins/docker:linux-arm64
+#   settings:
+#     auto_tag: true
+#     auto_tag_suffix: linux-arm64
+#     daemon_off: false
+#     dockerfile: docker/Dockerfile.linux.arm64
+#     password:
+#       from_secret: docker_password
+#     repo: 250ok/downstream
+#     username:
+#       from_secret: docker_username
+#   when:
+#     event:
+#       exclude:
+#       - pull_request
 
-  trigger:
-    ref:
-    - refs/heads/master
-    - "refs/tags/**"
-    - "refs/pull/**"
+#   trigger:
+#     ref:
+#     - refs/heads/master
+#     - "refs/tags/**"
+#     - "refs/pull/**"
 
-- name: build-push-arm
-  pull: always
-  image: golang:1.11
-  commands:
-  - "go build -v -ldflags \"-X main.version=${DRONE_COMMIT_SHA:0:8}\" -a -tags netgo -o release/linux/arm/drone-downstream"
-  environment:
-    CGO_ENABLED: 0
-    GO111MODULE: on
-  when:
-    event:
-      exclude:
-      - tag
+# - name: build-push-arm
+#   pull: always
+#   image: golang:1.11
+#   commands:
+#   - "go build -v -ldflags \"-X main.version=${DRONE_COMMIT_SHA:0:8}\" -a -tags netgo -o release/linux/arm/drone-downstream"
+#   environment:
+#     CGO_ENABLED: 0
+#     GO111MODULE: on
+#   when:
+#     event:
+#       exclude:
+#       - tag
 
-- name: build-tag-arm
-  pull: always
-  image: golang:1.11
-  commands:
-  - "go build -v -ldflags \"-X main.version=${DRONE_TAG##v}\" -a -tags netgo -o release/linux/arm/drone-downstream"
-  environment:
-    CGO_ENABLED: 0
-    GO111MODULE: on
-  when:
-    event:
-    - tag
+# - name: build-tag-arm
+#   pull: always
+#   image: golang:1.11
+#   commands:
+#   - "go build -v -ldflags \"-X main.version=${DRONE_TAG##v}\" -a -tags netgo -o release/linux/arm/drone-downstream"
+#   environment:
+#     CGO_ENABLED: 0
+#     GO111MODULE: on
+#   when:
+#     event:
+#     - tag
 
-- name: executable-arm
-  pull: always
-  image: golang:1.11
-  commands:
-  - ./release/linux/arm/drone-downstream --help
+# - name: executable-arm
+#   pull: always
+#   image: golang:1.11
+#   commands:
+#   - ./release/linux/arm/drone-downstream --help
 
-- name: dryrun-arm
-  pull: always
-  image: plugins/docker:linux-arm
-  settings:
-    daemon_ off: false
-    dockerfile: docker/Dockerfile.linux.arm
-    dry_run: true
-    password:
-      from_secret: docker_password
-    repo: 250ok/downstream
-    tags: linux-arm
-    username:
-      from_secret: docker_username
-  when:
-    event:
-    - pull_request
+# - name: dryrun-arm
+#   pull: always
+#   image: plugins/docker:linux-arm
+#   settings:
+#     daemon_ off: false
+#     dockerfile: docker/Dockerfile.linux.arm
+#     dry_run: true
+#     password:
+#       from_secret: docker_password
+#     repo: 250ok/downstream
+#     tags: linux-arm
+#     username:
+#       from_secret: docker_username
+#   when:
+#     event:
+#     - pull_request
 
-- name: publish-arm
-  pull: always
-  image: plugins/docker:linux-arm
-  settings:
-    auto_tag: true
-    auto_tag_suffix: linux-arm
-    daemon_off: false
-    dockerfile: docker/Dockerfile.linux.arm
-    password:
-      from_secret: docker_password
-    repo: 250ok/downstream
-    username:
-      from_secret: docker_username
-  when:
-    event:
-      exclude:
-      - pull_request
+# - name: publish-arm
+#   pull: always
+#   image: plugins/docker:linux-arm
+#   settings:
+#     auto_tag: true
+#     auto_tag_suffix: linux-arm
+#     daemon_off: false
+#     dockerfile: docker/Dockerfile.linux.arm
+#     password:
+#       from_secret: docker_password
+#     repo: 250ok/downstream
+#     username:
+#       from_secret: docker_username
+#   when:
+#     event:
+#       exclude:
+#       - pull_request
 
-  trigger:
-    ref:
-    - refs/heads/master
-    - "refs/tags/**"
-    - "refs/pull/**"
+#   trigger:
+#     ref:
+#     - refs/heads/master
+#     - "refs/tags/**"
+#     - "refs/pull/**"
 
 - name: manifest
   pull: always
