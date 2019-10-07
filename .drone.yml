@@ -34,7 +34,7 @@ steps:
     - "refs/tags/**"
     - "refs/pull/**"
 
-- name: build-push
+- name: build-push-amd64
   pull: always
   image: golang:1.11
   commands:
@@ -47,7 +47,7 @@ steps:
       exclude:
       - tag
 
-- name: build-tag
+- name: build-tag-amd64
   pull: always
   image: golang:1.11
   commands:
@@ -65,7 +65,7 @@ steps:
   commands:
   - ./release/linux/amd64/drone-downstream --help
 
-- name: dryrun
+- name: dryrun-amd64
   pull: always
   image: plugins/docker:linux-amd64
   settings:
@@ -82,7 +82,7 @@ steps:
     event:
     - pull_request
 
-- name: publish
+- name: publish-amd64
   pull: always
   image: plugins/docker:linux-amd64
   settings:
@@ -106,7 +106,7 @@ steps:
     - "refs/tags/**"
     - "refs/pull/**"
 
-- name: build-push
+- name: build-push-arm64
   pull: always
   image: golang:1.11
   commands:
@@ -119,7 +119,7 @@ steps:
       exclude:
       - tag
 
-- name: build-tag
+- name: build-tag-arm64
   pull: always
   image: golang:1.11
   commands:
@@ -131,13 +131,13 @@ steps:
     event:
     - tag
 
-- name: executable
+- name: executable-arm64
   pull: always
   image: golang:1.11
   commands:
   - ./release/linux/arm64/drone-downstream --help
 
-- name: dryrun
+- name: dryrun-arm64
   pull: always
   image: plugins/docker:linux-arm64
   settings:
@@ -154,7 +154,7 @@ steps:
     event:
     - pull_request
 
-- name: publish
+- name: publish-arm64
   pull: always
   image: plugins/docker:linux-arm64
   settings:
@@ -178,7 +178,7 @@ steps:
     - "refs/tags/**"
     - "refs/pull/**"
 
-- name: build-push
+- name: build-push-arm
   pull: always
   image: golang:1.11
   commands:
@@ -191,7 +191,7 @@ steps:
       exclude:
       - tag
 
-- name: build-tag
+- name: build-tag-arm
   pull: always
   image: golang:1.11
   commands:
@@ -203,13 +203,13 @@ steps:
     event:
     - tag
 
-- name: executable
+- name: executable-arm
   pull: always
   image: golang:1.11
   commands:
   - ./release/linux/arm/drone-downstream --help
 
-- name: dryrun
+- name: dryrun-arm
   pull: always
   image: plugins/docker:linux-arm
   settings:
@@ -226,7 +226,7 @@ steps:
     event:
     - pull_request
 
-- name: publish
+- name: publish-arm
   pull: always
   image: plugins/docker:linux-arm
   settings:
