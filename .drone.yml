@@ -28,11 +28,11 @@ steps:
   - name: gopath
     path: /go
 
-trigger:
-  ref:
-  - refs/heads/master
-  - "refs/tags/**"
-  - "refs/pull/**"
+  trigger:
+    ref:
+    - refs/heads/master
+    - "refs/tags/**"
+    - "refs/pull/**"
 
 - name: build-push
   pull: always
@@ -100,11 +100,11 @@ trigger:
       exclude:
       - pull_request
 
-trigger:
-  ref:
-  - refs/heads/master
-  - "refs/tags/**"
-  - "refs/pull/**"
+  trigger:
+    ref:
+    - refs/heads/master
+    - "refs/tags/**"
+    - "refs/pull/**"
 
 - name: build-push
   pull: always
@@ -213,7 +213,7 @@ trigger:
   pull: always
   image: plugins/docker:linux-arm
   settings:
-    daemon_off: false
+    daemon_ off: false
     dockerfile: docker/Dockerfile.linux.arm
     dry_run: true
     password:
@@ -262,19 +262,7 @@ trigger:
     username:
       from_secret: docker_username
 
-- name: microbadger
-  pull: always
-  image: plugins/webhook
-  settings:
-    urls:
-      from_secret: microbadger_url
-
 trigger:
   ref:
   - refs/heads/master
   - "refs/tags/**"
-
-depends_on:
-- linux-amd64
-- linux-arm64
-- linux-arm
