@@ -65,6 +65,11 @@ func main() {
 			Usage:  "Environment to trigger deploy for the respective build",
 			EnvVar: "PLUGIN_DEPLOY",
 		},
+		cli.BoolFlag{
+			Name:   "ignore-pending",
+			Usage:  "Do not trigger a build that is already pending",
+			EnvVar: "PLUGIN_IGNORE_PENDING",
+		},
 	}
 
 	if err := app.Run(os.Args); err != nil {
@@ -83,6 +88,7 @@ func run(c *cli.Context) error {
 		Params:         c.StringSlice("params"),
 		ParamsEnv:      c.StringSlice("params-from-env"),
 		Deploy:         c.String("deploy"),
+		IgnorePending:  c.Bool("ignore-pending"),
 	}
 
 	return plugin.Exec()

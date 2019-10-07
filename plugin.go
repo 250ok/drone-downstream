@@ -23,6 +23,7 @@ type Plugin struct {
 	Params         []string
 	ParamsEnv      []string
 	Deploy         string
+	IgnorePending  bool
 }
 
 // Exec runs the plugin
@@ -154,7 +155,10 @@ func (p *Plugin) Exec() error {
 					}
 					return fmt.Errorf("Error: unable to get latest build for %s.\n", entry)
 				}
-				if p.Wait && !waiting && (build.Status == drone.StatusRunning || build.Status == drone.StatusPending) {
+				if p.IgnorePending && build.Status == drone.StatusPending {
+					fmt.Printf("Skipping build for %s...a build is already pending\n", entry)
+					break I
+				} else if p.Wait && !waiting && (build.Status == drone.StatusRunning || build.Status == drone.StatusPending) {
 					fmt.Printf("BuildLast for repository: %s, returned build number: %v with a status of %s. Will retry for %v.\n", entry, build.Number, build.Status, p.Timeout)
 					waiting = true
 					continue
