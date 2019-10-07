@@ -256,11 +256,8 @@ steps:
   settings:
     auto_tag: true
     ignore_missing: true
-    password:
-      from_secret: docker_password
+    secrets: [ docker_username, docker_password ]
     spec: docker/manifest.tmpl
-    username:
-      from_secret: docker_username
 
   trigger:
     ref:
